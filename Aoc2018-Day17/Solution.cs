@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace Aoc2018_Day17
 {
     internal class Solution
@@ -8,21 +6,39 @@ namespace Aoc2018_Day17
 
         public object PartOne()
         {
-            var scanData = Scanner.Scan("example.txt");
+            var scanData = Scanner.Scan();
             
-            // Run a simulation of the water flow from the spring until steady state is reached.
-            using (var writer = new StringWriter())
-            {
-                ScanRenderer.Render(writer, scanData);
-                OutputFile.WriteAllText(writer.ToString(), "dry-map.txt");
-            }
+            WaterSpring.SimulateSteadyStateFlow(scanData, (500, 0));
 
-            return null;
+            ScanRenderer.RenderToFile("completed-map.txt", scanData);
+
+            return CalculateWaterVolume(scanData.data, includeFlowingWater: true);
         }
         
         public object PartTwo()
         {
-            return null;
+            var scanData = Scanner.Scan();
+            
+            WaterSpring.SimulateSteadyStateFlow(scanData, (500, 0));
+
+            ScanRenderer.RenderToFile("completed-map.txt", scanData);
+
+            return CalculateWaterVolume(scanData.data, includeFlowingWater: false);
+        }
+        
+        private static int CalculateWaterVolume(char[,] data, bool includeFlowingWater)
+        {
+            var result = 0;
+            
+            for (var y = 0; y < data.GetLength(0); y++)
+            for (var x = 0; x < data.GetLength(1); x++)
+            {
+                var c = data[y, x];
+                if (c == '~') result++;
+                if (includeFlowingWater && c == '|') result++;
+            }
+
+            return result;
         }
     }
 }
