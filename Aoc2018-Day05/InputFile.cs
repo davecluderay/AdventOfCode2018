@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Aoc2018_Day02
+namespace Aoc2018_Day05
 {
     internal static class InputFile
     {

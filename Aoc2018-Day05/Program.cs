@@ -1,11 +1,11 @@
 ﻿using System;
 
-using Aoc2018_Day03;
+using Aoc2018_Day05;
 
 try
 {
     var solution = new Solution();
-
+    
     Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine(solution.Title);
     Console.WriteLine(new string('-', solution.Title.Length));

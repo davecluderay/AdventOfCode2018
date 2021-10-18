@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Aoc2018_Day03
+namespace Aoc2018_Day05
 {
     internal static class OutputFile
     {

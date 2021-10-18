@@ -13,7 +13,7 @@ namespace Aoc2018_Day24
             var (immuneSystemUnitsRemaining, infectionUnitsRemaining) = Simulate();
             return Math.Max(immuneSystemUnitsRemaining, infectionUnitsRemaining);
         }
-        
+
         public object PartTwo()
         {
             var boost = 0;
@@ -37,13 +37,13 @@ namespace Aoc2018_Day24
             while (allGroups.GroupBy(g => g.GroupType).Count() > 1 && !stalemate)
             {
                 stalemate = true;
-                
+
                 // Decide a pecking order for target selection.
                 var selectorOrder = allGroups.OrderByDescending(x => (x.EffectivePower, x.Initiative))
                                              .ToList();
 
                 // Select targets
-                var pairs = new List<(Group attacker, Group target)>();
+                var pairs = new List<(Group attacker, Group? target)>();
                 foreach (var attacker in selectorOrder)
                 {
                     var target = allGroups
@@ -62,8 +62,8 @@ namespace Aoc2018_Day24
                     var attacker = p.attacker;
                     var target   = p.target;
 
-                    var damage        = attacker.InflictsDamage(target);
-                    var numberOfKills = Math.Min(target.NumberOfUnits, damage / target.HitPoints);
+                    var damage        = attacker.InflictsDamage(target!);
+                    var numberOfKills = Math.Min(target!.NumberOfUnits, damage / target.HitPoints);
 
                     target.NumberOfUnits -= numberOfKills;
                     if (numberOfKills > 0)

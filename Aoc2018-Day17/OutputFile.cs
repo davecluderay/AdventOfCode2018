@@ -1,25 +1,23 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 
 namespace Aoc2018_Day17
 {
     internal static class OutputFile
     {
-        public static void WriteAllLines(IEnumerable<string> lines, string fileName = null)
+        public static void WriteAllLines(IEnumerable<string> lines, string? fileName = null)
         {
-            var directoryPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            var directoryPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? ".";
             var filePath      = Path.Combine(directoryPath, fileName ?? "output.txt");
 
             File.WriteAllLines(filePath, lines);
         }
         
-        public static void WriteAllText(string text, string fileName = null)
+        public static void WriteAllText(string content, string? fileName = null)
         {
-            var directoryPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            var directoryPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? ".";
             var filePath      = Path.Combine(directoryPath, fileName ?? "output.txt");
 
-            File.WriteAllText(filePath, text);
+            File.WriteAllText(filePath, content);
         }
     }
 }
