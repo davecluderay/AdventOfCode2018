@@ -7,7 +7,7 @@ namespace Aoc2018_Day24
 {
     internal static class Groups
     {
-        public static IEnumerable<Group> ReadAll(string fileName = null)
+        public static IEnumerable<Group> ReadAll(string? fileName = null)
         {
             GroupType? currentGroupType = null;
             var currentSequence = 0;
@@ -19,21 +19,21 @@ namespace Aoc2018_Day24
                     currentSequence = 0;
                     continue;
                 }
-                    
+
                 if (line == "Infection:")
                 {
                     currentGroupType = GroupType.Infection;
                     currentSequence = 0;
                     continue;
                 }
-            
+
                 if (string.IsNullOrEmpty(line)) continue;
                 if (currentGroupType == null) throw new Exception("Expected group type header.");
-                
+
                 yield return ParseGroup(line, currentGroupType.Value, ++currentSequence);
             }
         }
-            
+
         private static Group ParseGroup(string line, GroupType groupType, int sequenceNumber)
         {
             var pattern = new Regex(
@@ -42,7 +42,7 @@ namespace Aoc2018_Day24
             var match = pattern.Match(line);
             if (!match.Success)
                 throw new Exception($"CANNOT MATCH: {line}");
-            
+
             var group = new Group(groupType, sequenceNumber, Convert.ToInt32(match.Groups["Units"].Value), Convert.ToInt32(match.Groups["HpPerUnits"].Value), (match.Groups["WeakOrImmune1"].Value == "immune" ? match.Groups["attackType1"].Value : match.Groups["WeakOrImmune2"].Value == "immune" ? match.Groups["attackType2"].Value : "").Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray(), (match.Groups["WeakOrImmune1"].Value == "weak" ? match.Groups["attackType1"].Value : match.Groups["WeakOrImmune2"].Value == "weak" ? match.Groups["attackType2"].Value : "").Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray(), Convert.ToInt32(match.Groups["DealsDamage"].Value), match.Groups["DamageType"].Value, Convert.ToInt32(match.Groups["Initiative"].Value));
             return group;
         }

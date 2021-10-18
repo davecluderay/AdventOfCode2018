@@ -1,47 +1,38 @@
 ﻿using System;
 
-namespace Aoc2018_Day24
+using Aoc2018_Day24;
+
+try
 {
-    public static class Program
-    {
-        public static void Main()
-        {
-            try
-            {
-                var solution = new Solution();
-                
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(solution.Title);
-                Console.WriteLine(new string('-', solution.Title.Length));
-                Console.ResetColor();
-                Console.WriteLine();
+    var solution = new Solution();
 
-                var result1 = solution.PartOne();
-                Console.WriteLine();
-                Console.Write("Part One Result: ");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(result1);
-                Console.ResetColor();
-                Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine(solution.Title);
+    Console.WriteLine(new string('-', solution.Title.Length));
+    Console.ResetColor();
+    Console.WriteLine();
 
-                var result2 = solution.PartTwo();
-                Console.WriteLine();
-                Console.Write("Part Two Result: ");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(result2);
-                Console.ResetColor();
-                Console.WriteLine();
-            }
-            catch (Exception exception)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine(exception);
-                Console.ResetColor();
-            }
-            finally
-            {
-                Console.WriteLine("Done.");
-            }
-        }
-    }
+    var result1 = solution.PartOne();
+    Console.Write("Part One Result: ");
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine(result1);
+    Console.ResetColor();
+    Console.WriteLine();
+
+    var result2 = solution.PartTwo();
+    Console.Write("Part Two Result: ");
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine(result2);
+    Console.ResetColor();
+    Console.WriteLine();
+}
+catch (Exception exception)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.Error.WriteLine(exception);
+    Console.ResetColor();
+}
+finally
+{
+    Console.WriteLine("Done.");
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 using Aoc2018_Day04;
 

@@ -14,7 +14,7 @@ namespace Aoc2018_Day03
             var claims = LoadClaims();
             var material = ApplyClaims(claims);
 
-            return material.GetOccupiedPositions().Count(p => material.Get(p).Count() > 1);
+            return material.GetOccupiedPositions().Count(p => material.Get(p)!.Count() > 1);
         }
 
         public object? PartTwo()
@@ -23,8 +23,8 @@ namespace Aoc2018_Day03
             var material = ApplyClaims(claims);
 
             var conflictingClaimIds = material.GetOccupiedPositions()
-                                              .Where(p => material.Get(p).Skip(1).Any())
-                                              .SelectMany(p => material.Get(p))
+                                              .Where(p => material.Get(p)!.Skip(1).Any())
+                                              .SelectMany(p => material.Get(p)!)
                                               .Distinct()
                                               .ToArray();
 
