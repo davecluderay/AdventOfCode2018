@@ -1,6 +1,4 @@
-﻿using System;
-
-using Aoc2018_Day01;
+﻿using Aoc2018_Day01;
 
 try
 {

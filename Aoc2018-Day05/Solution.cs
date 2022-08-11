@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Aoc2018_Day05
 {
     internal class Solution
     {
         public string Title => "Day 5: Alchemical Reduction";
 
-        public object? PartOne()
+        public object PartOne()
         {
             var polymer = InputFile.ReadAllText().Trim();
             var result = ReactPolymer(polymer);
             return result.Count();
         }
 
-        public object? PartTwo()
+        public object PartTwo()
         {
             var originalPolymer = InputFile.ReadAllText().Trim();
             var polymers = ModifyPolymer(originalPolymer);
@@ -23,11 +19,13 @@ namespace Aoc2018_Day05
             return results.Min();
         }
 
-        private static IEnumerable<IEnumerable<char>> ModifyPolymer(IEnumerable<char> polymer)
+        private static IEnumerable<string> ModifyPolymer(string polymer)
         {
             for (var i = 0; i < 26; i++)
             {
-                yield return polymer.Where(u => u != (char)('a' + i) && u != (char)('A' + i));
+                var result = polymer.Where(u => u != (char)('a' + i) && u != (char)('A' + i))
+                                    .ToArray();
+                yield return new string(result);
             }
         }
 

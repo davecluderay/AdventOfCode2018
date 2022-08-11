@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Aoc2018_Day03
 {
     internal class UnboundedGrid<T>

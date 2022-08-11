@@ -1,5 +1,3 @@
-using System;
-
 namespace Aoc2018_Day17
 {
     internal static class WaterSpring

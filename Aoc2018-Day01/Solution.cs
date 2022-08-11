@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Aoc2018_Day01
 {
     internal class Solution

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Aoc2018_Day04
@@ -12,20 +10,22 @@ namespace Aoc2018_Day04
         public object? PartOne()
         {
             var data = ReadAsleepData();
-            var sleepiestGuard = data.OrderByDescending(g => g.AsleepMinutes.Sum(a => a.Frequency)).First();
-            var minuteMostOftenSleeping = sleepiestGuard.AsleepMinutes.OrderByDescending(a => a.Frequency).First();
-            return sleepiestGuard.Guard * minuteMostOftenSleeping.Minute; // 39422
+            var sleepiestGuard = data.MaxBy(g => g.AsleepMinutes
+                                                  .Sum(a => a.Frequency));
+            var minuteMostOftenSleeping = sleepiestGuard.AsleepMinutes
+                                                        .OrderByDescending(a => a.Frequency)
+                                                        .First();
+            return sleepiestGuard.Guard * minuteMostOftenSleeping.Minute;
         }
 
         public object? PartTwo()
         {
             var data = ReadAsleepData();
             var selection = data.Select(x => (x.Guard,
-                                              MinuteMostOftenSleeping: x.AsleepMinutes.OrderByDescending(a => a.Frequency)
-                                                                                      .First()))
-                                .OrderByDescending(x => x.MinuteMostOftenSleeping.Frequency)
-                                .First();
-            return selection.Guard * selection.MinuteMostOftenSleeping.Minute; // 65474
+                                              MinuteMostOftenSleeping: x.AsleepMinutes
+                                                                        .OrderByDescending(a => a.Frequency)
+                                                                        .First())).MaxBy(x => x.MinuteMostOftenSleeping.Frequency);
+            return selection.Guard * selection.MinuteMostOftenSleeping.Minute;
         }
 
         private record AsleepMinuteFrequency(int Minute, int Frequency);
